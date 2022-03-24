@@ -68,8 +68,6 @@ public class Book{
         return "book.Book{" +
                 "author='" + author + '\'' +
                 ", title='" + title + '\'' +
-                ", publishingHouse='" + publishingHouse + '\'' +
-                ", yearOfPublishing=" + yearOfPublishing +
                 ", price=" + price +
                 ", genre=" + genre +
                 ", status=" + status +

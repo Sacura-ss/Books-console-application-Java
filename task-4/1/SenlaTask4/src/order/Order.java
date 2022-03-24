@@ -57,7 +57,6 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "status=" + status +
-                ", executionData=" + executionData +
                 ", price=" + price +
                 ", orderedBooks=" + orderedBooks +
                 '}';

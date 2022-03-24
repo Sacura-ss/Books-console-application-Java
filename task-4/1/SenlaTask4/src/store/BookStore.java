@@ -3,21 +3,31 @@ package store;
 import book.*;
 import order.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.TreeSet;
+import java.util.*;
 
 public class BookStore {
     private TreeSet<Book> books = new TreeSet<Book>(new BookTitleComparator()); //Список всех книг в магазине
     private ArrayList<Order> orderList = new ArrayList<>(); //Список заказов
-    private static ArrayList<Book> queryList = new ArrayList<>(); //Список запрошенных книг
+    private static TreeMap<Book,Integer> requestList = new TreeMap(new Comparator<Book>() {
+        @Override
+        public int compare(Book book, Book t1) {
+            if(book.getTitle().compareTo(t1.getTitle()) > 0)
+                return 1;
+            else if(book.getTitle().compareTo(t1.getTitle()) < 0) {
+                return -1;
+            }
+            else
+                return 0;
+        }
+    }); //Список запрошенных книг
 
     public static void leaveRequest(Book book) {
-        if (!queryList.contains(book))
-            queryList.add(book);
+        if (requestList.get(book) == null)
+            requestList.put(book, 1);
+        else
+            requestList.put(book, requestList.get(book) + 1);
     }
 
-    //TODO: статус в общей библиотеке или в заказе
     private void checkOrder(ArrayList<Book> orderedBooks) {
         for (Book b : orderedBooks) {
             if (b.getStatus() == BookStatus.LACK) {
@@ -38,7 +48,7 @@ public class BookStore {
     }
 
     public void removeFromWarehouse(Book book) {
-        books.remove(book);
+        //books.remove(book);
         book.setStatus(BookStatus.LACK);
     }
 
@@ -70,28 +80,74 @@ public class BookStore {
         return sorted;
     }
 
-    public TreeSet<Order> sortOrderByDataExecutionData(TreeSet<Order> unsorted) {
-        TreeSet<Order> sorted = new TreeSet<Order>(new OrderExecutionDataComparator());
-        sorted.addAll(unsorted);
-        return sorted;
-    }
-
-    public TreeSet<Order> sortOrderByPrice(TreeSet<Order> unsorted) {
-        TreeSet<Order> sorted = new TreeSet<Order>(new OrderPriceComparator());
-        sorted.addAll(unsorted);
-        return sorted;
-    }
-
-    public TreeSet<Order> sortOrderByStatus(TreeSet<Order> unsorted) {
-        TreeSet<Order> sorted = new TreeSet<Order>(new OrderStatusComparator());
-        sorted.addAll(unsorted);
-        return sorted;
-    }
-
     public TreeSet<Book> sortBooksByPrice(TreeSet<Book> unsortedBooks) {
         TreeSet<Book> sorted = new TreeSet<Book>(new BookPriceComparator());
         sorted.addAll(unsortedBooks);
         return sorted;
+    }
+
+    public ArrayList<Order> sortOrderByDataExecutionData(ArrayList<Order> unsorted) {
+        ArrayList<Order> sorted = new ArrayList<Order>(unsorted);
+        sorted.sort(new OrderExecutionDataComparator());
+        return sorted;
+    }
+
+    public ArrayList<Order> sortOrderByPrice(ArrayList<Order> unsorted) {
+        ArrayList<Order> sorted = new ArrayList<Order>(unsorted);
+        sorted.sort(new OrderPriceComparator());
+        return sorted;
+    }
+
+    public ArrayList<Order> sortOrderByStatus(ArrayList<Order> unsorted) {
+        ArrayList<Order> sorted = new ArrayList<Order>(unsorted);
+        sorted.sort(new OrderStatusComparator());
+        return sorted;
+    }
+
+    public SortedSet<Map.Entry<Book, Integer>> sortRequestByAmount(TreeMap<Book, Integer> unsorted){
+        SortedSet<Map.Entry<Book, Integer>> sorted = new TreeSet<Map.Entry<Book, Integer>>(
+                new Comparator<Map.Entry<Book, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<Book, Integer> r1,
+                                       Map.Entry<Book, Integer> r2) {
+                        return r1.getValue().compareTo(r2.getValue());
+                    }
+                });
+        sorted.addAll(unsorted.entrySet());
+        return sorted;
+    }
+
+    public TreeMap<Book, Integer> sortRequestByTitle(TreeMap<Book, Integer> unsorted){
+        return unsorted;
+        //it is already sorted TreeMap))
+    }
+
+    public TreeMap<Book, Integer> sortRequestByAuthor(TreeMap<Book, Integer> unsorted){
+        TreeMap<Book, Integer> sorted = new TreeMap<>(new Comparator<Book>() {
+            @Override
+            public int compare(Book book, Book t1) {
+                if(book.getAuthor().compareTo(t1.getAuthor()) > 0)
+                    return 1;
+                else if(book.getAuthor().compareTo(t1.getAuthor()) < 0) {
+                    return -1;
+                }
+                else
+                    return 0;
+            }
+        });
+        return sorted;
+    }
+
+    public TreeSet<Book> getBooks() {
+        return books;
+    }
+
+    public ArrayList<Order> getOrderList() {
+        return orderList;
+    }
+
+    public static TreeMap<Book, Integer> getRequestList() {
+        return requestList;
     }
 
     @Override
