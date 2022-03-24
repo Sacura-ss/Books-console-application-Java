@@ -1,3 +1,9 @@
+import book.Book;
+import book.BookStatus;
+import book.Genre;
+import order.Order;
+import store.BookStore;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -14,12 +20,18 @@ public class TestClass {
         }
 
 
-        Order or = bookStore.createOrder(orderBook);
+        Order or = bookStore.createOrder(Calendar.getInstance() ,orderBook);
         System.out.println(bookStore);
 
         bookStore.cancelOrder(or);
         System.out.println(bookStore);
-        System.out.println(or.getOrderStatus());
+
+
+        orderBook.get(0).setStatus(BookStatus.LACK);
+        orderBook.get(1).setStatus(BookStatus.AVAILABILITY);
+        System.out.println(orderBook.get(0).getStatus());
+        System.out.println(orderBook.get(1).getStatus());
+        System.out.println(orderBook.get(0).getStatus().compareTo(orderBook.get(1).getStatus()));
 
     }
 }
