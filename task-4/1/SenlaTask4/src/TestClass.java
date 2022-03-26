@@ -32,15 +32,34 @@ public class TestClass {
          Calendar executionData = Calendar.getInstance();
          executionData.add(Calendar.DATE, 5);
          Order order1 = bookStore.createOrder(executionData , wantBooks);
-         order1.setStatus(OrderStatus.COMPLETED);
+         order1.setStatus(OrderStatus.CANCELED);
 
+         ArrayList<Book> wantBooks2 = new ArrayList<>(wantBooks);
+         wantBooks2.remove(book3);
          bookStore.removeFromWarehouse(book2);
-         Order order2 = bookStore.createOrder(executionData, wantBooks);
-         
+         Order order2 = bookStore.createOrder(executionData, wantBooks2);
+
+         //print store сondition
          System.out.println(bookStore.sortBooksByPrice(bookStore.getBooks()));
          System.out.println(bookStore.sortOrderByStatus(bookStore.getOrderList()));
          System.out.println(bookStore.sortRequestByAmount(bookStore.getRequestList()));
 
+         //complete orders
+         order1.setStatus(OrderStatus.COMPLETED);
+         order2.setStatus(OrderStatus.COMPLETED);
 
+         //print sorted completed orders
+         Calendar begin = Calendar.getInstance();
+         Calendar end = Calendar.getInstance();
+         begin.add(Calendar.DATE, -5);
+         end.add(Calendar.DATE, +5);
+         System.out.println(bookStore.sortOrderByPrice(bookStore.getCompletedOrder(begin, end)));
+
+         //test other methods
+         System.out.println(bookStore.getProfit(begin,end));
+         System.out.println(bookStore.getAmountCompletedOrder(begin,end));
+         System.out.println(bookStore.getIrrelevantBooks());
+         System.out.println(order1);
+         System.out.println(book1);
      }
 }

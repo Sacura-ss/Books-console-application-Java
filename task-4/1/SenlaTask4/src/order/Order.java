@@ -53,6 +53,10 @@ public class Order {
         this.price = price;
     }
 
+    public ArrayList<Book> getOrderedBooks() {
+        return orderedBooks;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
