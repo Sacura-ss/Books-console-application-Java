@@ -1,7 +1,5 @@
 package book;
 
-import book.Book;
-
 import java.util.Comparator;
 
 public class BookYearOfPublishingComparator implements Comparator<Book> {

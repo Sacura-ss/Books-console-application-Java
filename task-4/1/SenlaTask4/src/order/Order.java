@@ -1,8 +1,6 @@
 package order;
 
 import book.Book;
-import book.BookStatus;
-import store.BookStore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,7 +14,7 @@ public class Order {
 
     private Double getTotalPrice(ArrayList<Book> orderedBooks) {
         double totalPrice = 0;
-        for(Book p: orderedBooks) {
+        for (Book p : orderedBooks) {
             totalPrice += p.getPrice();
         }
         return totalPrice;

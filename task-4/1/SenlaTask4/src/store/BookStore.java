@@ -9,15 +9,14 @@ public class BookStore {
 
     private TreeSet<Book> books = new TreeSet<Book>(new BookTitleComparator()); //Список всех книг в магазине
     private ArrayList<Order> orderList = new ArrayList<>(); //Список заказов
-    private static TreeMap<Book,Integer> requestList = new TreeMap(new Comparator<Book>() {
+    private static TreeMap<Book, Integer> requestList = new TreeMap(new Comparator<Book>() {
         @Override
         public int compare(Book book, Book t1) {
-            if(book.getTitle().compareTo(t1.getTitle()) > 0)
+            if (book.getTitle().compareTo(t1.getTitle()) > 0)
                 return 1;
-            else if(book.getTitle().compareTo(t1.getTitle()) < 0) {
+            else if (book.getTitle().compareTo(t1.getTitle()) < 0) {
                 return -1;
-            }
-            else
+            } else
                 return 0;
         }
     }); //Список запрошенных книг
@@ -75,6 +74,7 @@ public class BookStore {
         sorted.addAll(unsorted);
         return sorted;
     }
+
     public TreeSet<Book> sortBooksByStatus(TreeSet<Book> unsorted) {
         TreeSet<Book> sorted = new TreeSet<Book>(new BookStatusComparator());
         sorted.addAll(unsorted);
@@ -105,7 +105,7 @@ public class BookStore {
         return sorted;
     }
 
-    public SortedSet<Map.Entry<Book, Integer>> sortRequestByAmount(TreeMap<Book, Integer> unsorted){
+    public SortedSet<Map.Entry<Book, Integer>> sortRequestByAmount(TreeMap<Book, Integer> unsorted) {
         SortedSet<Map.Entry<Book, Integer>> sorted = new TreeSet<Map.Entry<Book, Integer>>(
                 new Comparator<Map.Entry<Book, Integer>>() {
                     @Override
@@ -118,21 +118,20 @@ public class BookStore {
         return sorted;
     }
 
-    public TreeMap<Book, Integer> sortRequestByTitle(TreeMap<Book, Integer> unsorted){
+    public TreeMap<Book, Integer> sortRequestByTitle(TreeMap<Book, Integer> unsorted) {
         return unsorted;
         //it is already sorted TreeMap))
     }
 
-    public TreeMap<Book, Integer> sortRequestByAuthor(TreeMap<Book, Integer> unsorted){
+    public TreeMap<Book, Integer> sortRequestByAuthor(TreeMap<Book, Integer> unsorted) {
         TreeMap<Book, Integer> sorted = new TreeMap<>(new Comparator<Book>() {
             @Override
             public int compare(Book book, Book t1) {
-                if(book.getAuthor().compareTo(t1.getAuthor()) > 0)
+                if (book.getAuthor().compareTo(t1.getAuthor()) > 0)
                     return 1;
-                else if(book.getAuthor().compareTo(t1.getAuthor()) < 0) {
+                else if (book.getAuthor().compareTo(t1.getAuthor()) < 0) {
                     return -1;
-                }
-                else
+                } else
                     return 0;
             }
         });
@@ -141,8 +140,8 @@ public class BookStore {
 
     public ArrayList<Order> getCompletedOrder(Calendar begin, Calendar end) {
         ArrayList<Order> completedOrder = new ArrayList<Order>();
-        for(Order o: orderList)
-            if(OrderStatus.COMPLETED.equals(o.getStatus())
+        for (Order o : orderList)
+            if (OrderStatus.COMPLETED.equals(o.getStatus())
                     && o.getExecutionData().compareTo(begin) >= 0
                     && o.getExecutionData().compareTo(end) <= 0)
                 completedOrder.add(o);
@@ -150,25 +149,23 @@ public class BookStore {
     }
 
     public Integer getAmountCompletedOrder(Calendar begin, Calendar end) {
-        return getCompletedOrder(begin,end).size();
+        return getCompletedOrder(begin, end).size();
     }
 
     public Double getProfit(Calendar begin, Calendar end) {
         Double sum = 0.0;
-        for(Order o:this.getCompletedOrder(begin,end))
+        for (Order o : this.getCompletedOrder(begin, end))
             sum += o.getPrice();
         return sum;
     }
 
-    public ArrayList<Book> getIrrelevantBooks(){
+    public ArrayList<Book> getIrrelevantBooks() {
         ArrayList<Book> oldBooks = new ArrayList<>(books);
-        //System.out.println(oldBooks);
         Calendar lostTime = Calendar.getInstance();
         lostTime.add(Calendar.MONTH, -6);
         ArrayList<Order> orders = getCompletedOrder(lostTime, Calendar.getInstance());
-        for (Order o: orders)
-            for(Book orB: o.getOrderedBooks()) {
-                //System.out.println(orB);
+        for (Order o : orders)
+            for (Book orB : o.getOrderedBooks()) {
                 oldBooks.remove(orB);
             }
         return oldBooks;

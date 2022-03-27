@@ -2,7 +2,7 @@ package book;
 
 import java.util.Calendar;
 
-public class Book{
+public class Book {
     private String author;
     private String title;
     private String publishingHouse;
