@@ -4,12 +4,7 @@ import java.util.Comparator;
 
 public class BookStatusComparator implements Comparator<Book> {
     @Override
-    public int compare(Book book, Book t1) {
-        if (book.getStatus().compareTo(t1.getStatus()) > 0)
-            return 1;
-        else if (book.getStatus().compareTo(t1.getStatus()) < 0) {
-            return -1;
-        } else
-            return 0;
+    public int compare(Book book1, Book book2) {
+        return book1.getStatus().toString().compareTo(book2.getStatus().toString());
     }
 }

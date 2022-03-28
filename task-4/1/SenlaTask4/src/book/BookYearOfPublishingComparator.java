@@ -4,12 +4,7 @@ import java.util.Comparator;
 
 public class BookYearOfPublishingComparator implements Comparator<Book> {
     @Override
-    public int compare(Book book, Book t1) {
-        if (book.getYearOfPublishing().YEAR > t1.getYearOfPublishing().YEAR)
-            return 1;
-        else if (book.getYearOfPublishing().YEAR < t1.getYearOfPublishing().YEAR) {
-            return -1;
-        } else
-            return 0;
+    public int compare(Book book1, Book book2) {
+        return book1.getYearOfPublishing().compareTo(book2.getYearOfPublishing());
     }
 }

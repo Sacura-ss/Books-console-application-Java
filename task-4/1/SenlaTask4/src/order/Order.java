@@ -4,15 +4,16 @@ import book.Book;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Order {
     private OrderStatus status;
     private Calendar executionData;
     private Double price;
-    private ArrayList<Book> orderedBooks;
+    private List<Book> orderedBooks;
+    
 
-
-    private Double getTotalPrice(ArrayList<Book> orderedBooks) {
+    private Double getTotalPrice(List<Book> orderedBooks) {
         double totalPrice = 0;
         for (Book p : orderedBooks) {
             totalPrice += p.getPrice();
@@ -20,7 +21,7 @@ public class Order {
         return totalPrice;
     }
 
-    public Order(Calendar executionData, ArrayList<Book> orderedBooks) {
+    public Order(Calendar executionData, List<Book> orderedBooks) {
         this.executionData = executionData;
         this.price = getTotalPrice(orderedBooks);
         this.orderedBooks = orderedBooks;
@@ -51,7 +52,7 @@ public class Order {
         this.price = price;
     }
 
-    public ArrayList<Book> getOrderedBooks() {
+    public List<Book> getOrderedBooks() {
         return orderedBooks;
     }
 

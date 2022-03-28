@@ -42,7 +42,7 @@ public class TestClass {
         //print store сondition
         System.out.println(bookStore.sortBooksByPrice(bookStore.getBooks()));
         System.out.println(bookStore.sortOrderByStatus(bookStore.getOrderList()));
-        System.out.println(bookStore.sortRequestByAmount(bookStore.getRequestList()));
+        System.out.println(bookStore.sortRequestByAmount(bookStore.getRequestMap()));
 
         //complete orders
         order1.setStatus(OrderStatus.COMPLETED);
@@ -61,5 +61,6 @@ public class TestClass {
         System.out.println(bookStore.getIrrelevantBooks());
         System.out.println(order1);
         System.out.println(book1);
+
     }
 }
