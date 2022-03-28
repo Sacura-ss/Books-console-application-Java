@@ -118,15 +118,8 @@ public class BookStore {
         return sorted;
     }
 
-    public SortedSet<Map.Entry<Book, Integer>> sortRequestByAmount(Map<Book, Integer> unsorted) {
-        SortedSet<Map.Entry<Book, Integer>> sorted = new TreeSet<Map.Entry<Book, Integer>>(
-                new Comparator<Map.Entry<Book, Integer>>() {
-                    @Override
-                    public int compare(Map.Entry<Book, Integer> r1,
-                                       Map.Entry<Book, Integer> r2) {
-                        return r1.getValue().compareTo(r2.getValue());
-                    }
-                });
+    public Set<Map.Entry<Book, Integer>> sortRequestByAmount(Map<Book, Integer> unsorted) {
+        SortedSet<Map.Entry<Book, Integer>> sorted = new TreeSet<Map.Entry<Book, Integer>>(Map.Entry.comparingByValue());
         sorted.addAll(unsorted.entrySet());
         return sorted;
     }

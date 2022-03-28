@@ -22,6 +22,7 @@ public class TestClass {
         bookStore.addBookToWarehouse(book3);
 
         bookStore.removeFromWarehouse(book3);
+        bookStore.removeFromWarehouse(book2);
 
         // books that the buyer wants to buy
         ArrayList<Book> wantBooks = new ArrayList<>();
@@ -41,12 +42,12 @@ public class TestClass {
 
         ArrayList<Book> wantBooks2 = new ArrayList<>(wantBooks);
         wantBooks2.remove(book3);
-        bookStore.removeFromWarehouse(book2);
         Order order2 = bookStore.createOrder(executionData, wantBooks2, client2);
 
         //print store сondition
         System.out.println(bookStore.sortBooksByPrice(bookStore.getBooks()));
         System.out.println(bookStore.sortOrderByStatus(bookStore.getOrderList()));
+        System.out.println("ggg");
         System.out.println(bookStore.sortRequestByAmount(bookStore.getRequestMap()));
 
         //complete orders
