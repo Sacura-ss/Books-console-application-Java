@@ -1,8 +1,8 @@
 package order;
 
 import book.Book;
+import human.Client;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -11,7 +11,9 @@ public class Order {
     private Calendar executionData;
     private Double price;
     private List<Book> orderedBooks;
-    
+
+    private Client client;
+
 
     private Double getTotalPrice(List<Book> orderedBooks) {
         double totalPrice = 0;
@@ -21,9 +23,10 @@ public class Order {
         return totalPrice;
     }
 
-    public Order(Calendar executionData, List<Book> orderedBooks) {
+    public Order(Calendar executionData, List<Book> orderedBooks, Client client) {
         this.executionData = executionData;
         this.price = getTotalPrice(orderedBooks);
+        this.client = client;
         this.orderedBooks = orderedBooks;
         status = OrderStatus.NEW;
     }
@@ -62,6 +65,7 @@ public class Order {
                 "status=" + status +
                 ", price=" + price +
                 ", orderedBooks=" + orderedBooks +
+                ", client=" + client +
                 '}';
     }
 }

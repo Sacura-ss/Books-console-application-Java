@@ -8,6 +8,7 @@ import book.BookStatus;
 import book.BookStatusComparator;
 import book.BookTitleComparator;
 import book.BookYearOfPublishingComparator;
+import human.Client;
 import order.Order;
 import order.OrderExecutionDataComparator;
 import order.OrderPriceComparator;
@@ -17,8 +18,11 @@ import order.OrderStatusComparator;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -26,9 +30,9 @@ import java.util.TreeSet;
 
 public class BookStore {
 
-    private SortedSet<Book> books = new TreeSet<Book>(); //Список всех книг в магазине
+    private Set<Book> books = new HashSet<Book>(); //Список всех книг в магазине
     private List<Order> orderList = new ArrayList<Order>(); //Список заказов
-    private static Map<Book, Integer> requestMap = new TreeMap(); //Список запрошенных книг
+    private static Map<Book, Integer> requestMap = new HashMap(); //Список запрошенных книг и колчисетво запросов к каждой
 
     public static void leaveRequest(Book book) {
         if (requestMap.get(book) == null)
@@ -45,8 +49,8 @@ public class BookStore {
         }
     }
 
-    public Order createOrder(Calendar executionData, List<Book> orderBooks) {
-        Order order = new Order(executionData, orderBooks);
+    public Order createOrder(Calendar executionData, List<Book> orderBooks, Client client) {
+        Order order = new Order(executionData, orderBooks, client);
         checkOrder(orderBooks);
         orderList.add(order);
         return order;
@@ -66,31 +70,31 @@ public class BookStore {
         book.setStatus(BookStatus.AVAILABILITY);
     }
 
-    public SortedSet<Book> sortBooksByAuthor(SortedSet<Book> unsorted) {
+    public Set<Book> sortBooksByAuthor(Set<Book> unsorted) {
         SortedSet<Book> sorted = new TreeSet<Book>(new BookAuthorComparator());
         sorted.addAll(unsorted);
         return sorted;
     }
 
-    public SortedSet<Book> sortBooksByTitle(SortedSet<Book> unsorted) {
+    public Set<Book> sortBooksByTitle(Set<Book> unsorted) {
         SortedSet<Book> sorted = new TreeSet<Book>(new BookTitleComparator());
         sorted.addAll(unsorted);
         return sorted;
     }
 
-    public SortedSet<Book> sortBooksByYearOfPublishing(SortedSet<Book> unsorted) {
+    public Set<Book> sortBooksByYearOfPublishing(Set<Book> unsorted) {
         SortedSet<Book> sorted = new TreeSet<Book>(new BookYearOfPublishingComparator());
         sorted.addAll(unsorted);
         return sorted;
     }
 
-    public SortedSet<Book> sortBooksByStatus(SortedSet<Book> unsorted) {
+    public Set<Book> sortBooksByStatus(Set<Book> unsorted) {
         SortedSet<Book> sorted = new TreeSet<Book>(new BookStatusComparator());
         sorted.addAll(unsorted);
         return sorted;
     }
 
-    public SortedSet<Book> sortBooksByPrice(SortedSet<Book> unsortedBooks) {
+    public Set<Book> sortBooksByPrice(Set<Book> unsortedBooks) {
         SortedSet<Book> sorted = new TreeSet<Book>(new BookPriceComparator());
         sorted.addAll(unsortedBooks);
         return sorted;
@@ -181,7 +185,7 @@ public class BookStore {
         return oldBooks;
     }
 
-    public SortedSet<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 

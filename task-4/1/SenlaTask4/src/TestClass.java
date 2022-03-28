@@ -1,5 +1,6 @@
 import book.Book;
 import book.Genre;
+import human.Client;
 import order.Order;
 import order.OrderStatus;
 import store.BookStore;
@@ -28,16 +29,20 @@ public class TestClass {
         wantBooks.add(book2);
         wantBooks.add(book3);
 
+        //generate clients
+        Client client1 = new Client("Ulfric", " Stormcloak", "ulfric@gmail.com");
+        Client client2 = new Client("Tullius", " General", "tutu@gmail.com");
+
         //generate orders
         Calendar executionData = Calendar.getInstance();
         executionData.add(Calendar.DATE, 5);
-        Order order1 = bookStore.createOrder(executionData, wantBooks);
+        Order order1 = bookStore.createOrder(executionData, wantBooks, client1);
         order1.setStatus(OrderStatus.CANCELED);
 
         ArrayList<Book> wantBooks2 = new ArrayList<>(wantBooks);
         wantBooks2.remove(book3);
         bookStore.removeFromWarehouse(book2);
-        Order order2 = bookStore.createOrder(executionData, wantBooks2);
+        Order order2 = bookStore.createOrder(executionData, wantBooks2, client2);
 
         //print store сondition
         System.out.println(bookStore.sortBooksByPrice(bookStore.getBooks()));
