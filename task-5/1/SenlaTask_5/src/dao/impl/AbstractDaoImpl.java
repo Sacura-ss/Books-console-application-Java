@@ -1,5 +1,6 @@
 package dao.impl;
 
+import controller.action.UniqueId;
 import dao.AbstractDao;
 import dao.entity.AbstractEntity;
 
@@ -34,6 +35,7 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity>
     @Override
     public void create(T entity) {
         repository.add(entity);
+        entity.setId(UniqueId.generateUniqueId());
     }
 
     public void update(Long id, T newEntity) {

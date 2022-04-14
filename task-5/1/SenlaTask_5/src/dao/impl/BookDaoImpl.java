@@ -84,35 +84,35 @@ public class BookDaoImpl extends AbstractDaoImpl<Book>
 
     @Override
     public List<Book> sortBooksByAuthor() {
-        List list = new ArrayList<>(getAll());
+        List list = getAll();
         list.sort((Comparator<Book>) (book1, book2) -> book1.getAuthor().compareTo(book2.getAuthor()));
         return list;
     }
 
     @Override
     public List<Book> sortBooksByTitle() {
-        List list = new ArrayList<>(getAll());
+        List list = getAll();
         list.sort((Comparator<Book>) (book1, book2) -> book1.getTitle().compareTo(book2.getTitle()));
         return list;
     }
 
     @Override
     public List<Book> sortBooksByYearOfPublishing() {
-        List list = new ArrayList<>(getAll());
+        List list = getAll();
         list.sort((Comparator<Book>) (book1, book2) -> book1.getYearOfPublishing().compareTo(book2.getYearOfPublishing()));
         return list;
     }
 
     @Override
     public List<Book> sortBooksByStatus() {
-        List list = new ArrayList<>(getAll());
+        List list = getAll();
         list.sort((Comparator<Book>) (book1, book2) -> book1.getStatus().toString().compareTo(book2.getStatus().toString()));
         return list;
     }
 
     @Override
     public List<Book> sortBooksByPrice() {
-        List list = new ArrayList<>(getAll());
+        List list = getAll();
         list.sort((Comparator<Book>) (book1, book2) -> book1.getPrice().compareTo(book2.getPrice()));
         return list;
     }

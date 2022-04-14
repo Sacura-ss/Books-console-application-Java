@@ -18,14 +18,14 @@ import service.impl.OrderServiceImpl;
 import service.impl.RequestServiceImpl;
 
 
-public class Action {
-    private BookDao bookDao = new BookDaoImpl();
-    private ClientDao clientDao = new ClientDaoImpl();
-    private OrderDao orderDao = new OrderDaoImpl();
-    private RequestDao requestDao = new RequestDaoImpl();
+public abstract class Action {
+    private static BookDao bookDao = new BookDaoImpl();
+    private static ClientDao clientDao = new ClientDaoImpl();
+    private static OrderDao orderDao = new OrderDaoImpl();
+    private static RequestDao requestDao = new RequestDaoImpl();
 
-    protected BookService bookService = new BookServiceImpl(bookDao, orderDao);
-    protected ClientService clientService = new ClientServiceImpl(clientDao);
-    protected OrderService orderService = new OrderServiceImpl(orderDao, requestDao, clientDao, bookDao);
-    protected RequestService requestService = new RequestServiceImpl(requestDao, bookDao);
+    protected static BookService bookService = new BookServiceImpl(bookDao, orderDao);
+    protected static ClientService clientService = new ClientServiceImpl(clientDao);
+    protected static OrderService orderService = new OrderServiceImpl(orderDao, requestDao, clientDao, bookDao);
+    protected static RequestService requestService = new RequestServiceImpl(requestDao, bookDao);
 }

@@ -17,12 +17,12 @@ public class CreateClientAction extends Action implements IAction {
         String email = Reader.readEmail();
 
         Client client = new Client();
-        client.setId(UniqueId.generateUniqueId());
         client.setFirstName(name);
         client.setSecondName(surname);
         client.setEmail(email);
 
         clientService.create(client);
+        System.out.println(clientService.getAll());
         System.out.println("Create " + client);
     }
 }

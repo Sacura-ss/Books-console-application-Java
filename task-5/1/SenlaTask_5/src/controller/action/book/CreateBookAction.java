@@ -26,7 +26,6 @@ public class CreateBookAction extends Action implements IAction {
         BookGenre bookGenre = Reader.readBookGenre();
 
         Book book = new Book();
-        book.setId(UniqueId.generateUniqueId());
         book.setAuthor(author);
         book.setTitle(title);
         book.setPublishingHouse(publishingHouse);

@@ -7,6 +7,7 @@ import controller.action.IAction;
 public class DeleteClientAction extends Action implements IAction {
     @Override
     public void execute() {
+        System.out.println(clientService.getAll());
         System.out.println("Enter id");
         Long id = Reader.readId();
 

@@ -101,21 +101,21 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
     @Override
     public List<Order> sortOrderByExecutionData() {
         //List<Order> list = new ArrayList<>(getAll()).stream().sorted(new OrderExecutionDataComparator()).collect(Collectors.toList());
-        List<Order> list = new ArrayList<>(getAll());
+        List<Order> list = getAll();
         list.sort((order1, order2) -> order1.getExecutionData().compareTo(order2.getExecutionData()));
         return list;
     }
 
     @Override
     public List<Order> sortOrderByPrice() {
-        List<Order> list = new ArrayList<>(getAll());
+        List<Order> list = getAll();
         list.sort((order1, order2) -> order1.getPrice().compareTo(order2.getPrice()));
         return list;
     }
 
     @Override
     public List<Order> sortOrderByStatus() {
-        List<Order> list = new ArrayList<>(getAll());
+        List<Order> list = getAll();
         list.sort((order1, order2) -> order1.getStatus().toString().compareTo(order2.getStatus().toString()));
         return list;
     }

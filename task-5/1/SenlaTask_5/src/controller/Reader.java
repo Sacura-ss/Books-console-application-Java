@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Reader {
-    private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static Scanner in = new Scanner(System.in);
 
     public static String readName() {
@@ -23,7 +23,7 @@ public class Reader {
         while (true) {
             System.out.println("Please enter a valid value>> ");
             try {
-                String line = r.readLine();
+                String line = reader.readLine();
                 // Accept a line with alphabetic characters delimited with space.
                 if (line.matches("[A-Za-z ]+$")) {
                     name = line;
@@ -47,7 +47,7 @@ public class Reader {
         while (true) {
             System.out.println("Please enter a valid email>> ");
             try {
-                String line = r.readLine();
+                String line = reader.readLine();
                 mather = VALID_EMAIL_ADDRESS_REGEX.matcher(line);
                 if (mather.matches()) {
                     email = line;

@@ -9,7 +9,6 @@ public class CreateRequestAction extends Action implements IAction {
     @Override
     public void execute() {
         Request request = new Request();
-        request.setId(UniqueId.generateUniqueId());
         requestService.create(request);
 
         System.out.println("Create " + request);

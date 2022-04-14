@@ -9,7 +9,6 @@ public class CreateOrderAction extends Action implements IAction {
     @Override
     public void execute() {
         Order order = new Order();
-        order.setId(UniqueId.generateUniqueId());
         orderService.create(order);
         System.out.println("Create " + order);
     }
