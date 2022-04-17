@@ -3,7 +3,6 @@ package service.impl;
 import dao.ClientDao;
 import dao.entity.Client;
 import service.ClientService;
-import service.Importable;
 
 import java.util.Scanner;
 
@@ -16,6 +15,7 @@ public class ClientServiceImpl extends AbstractServiceImpl<Client, ClientDao>
         super(clientDao);
         this.clientDao = clientDao;
     }
+
     @Override
     public void importFromLine(String line) {
         Client client = new Client();

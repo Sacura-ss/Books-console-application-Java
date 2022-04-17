@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class RequestServiceImpl extends AbstractServiceImpl<Request, RequestDao>
         implements RequestService {
-    private RequestDao requestDao;
-    private BookDao bookDao;
+    private final RequestDao requestDao;
+    private final BookDao bookDao;
 
     public RequestServiceImpl(RequestDao requestDao, BookDao bookDao) {
         super(requestDao);
@@ -25,7 +25,7 @@ public class RequestServiceImpl extends AbstractServiceImpl<Request, RequestDao>
         Request request = requestDao.getById(requestId);
         Book book = bookDao.getById(bookId);
         request.setBook(book);
-        bookDao.changeAmountRequestById(bookId,book.getAmountRequest() + 1);
+        bookDao.changeAmountRequestById(bookId, book.getAmountRequest() + 1);
     }
 
     @Override

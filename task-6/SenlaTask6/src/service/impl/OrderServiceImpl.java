@@ -24,12 +24,12 @@ import java.util.Scanner;
 public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
         implements OrderService {
 
-    private OrderDao orderDao;
-    private RequestDao requestDao;
+    private final OrderDao orderDao;
+    private final RequestDao requestDao;
 
-    private ClientDao clientDao;
+    private final ClientDao clientDao;
 
-    private BookDao bookDao;
+    private final BookDao bookDao;
 
     public OrderServiceImpl(OrderDao orderDao, RequestDao requestDao,
                             ClientDao clientDao, BookDao bookDao) {
@@ -59,8 +59,8 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
     public void checkOrderForLeaveRequest(Long orderId, Long requestId) {
         Order order = orderDao.getById(orderId);
         Request request = requestDao.getById(requestId);
-        for(Book book: order.getOrderedBooks()) {
-            if(book.getStatus().equals(BookStatus.LACK)) {
+        for (Book book : order.getOrderedBooks()) {
+            if (book.getStatus().equals(BookStatus.LACK)) {
                 request.setBook(book);
             }
         }
@@ -118,7 +118,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
 
     private String checkData(String data) {
         Integer end = data.length() - 1;
-        if (data.charAt(0) == '[' ){
+        if (data.charAt(0) == '[') {
             data = data.substring(1);
             end--;
         }
@@ -132,6 +132,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
         }
         return data;
     }
+
     @Override
     public void importFromLine(String line) {
         Order order = new Order();
@@ -156,8 +157,7 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
                     order.setExecutionData(yearOfPublishing);
                 } catch (ParseException e) {
                 }
-            }
-            else if (index == 3) {
+            } else if (index == 3) {
                 List<Book> books = new ArrayList<>();
                 while (data.charAt(data.length() - 1) != ']') {
                     data = checkData(data);
@@ -167,11 +167,9 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
                 data = checkData(data);
                 books.add(bookDao.getById(Long.parseLong(data)));
                 order.setOrderedBooks(books);
-            }
-            else if (index == 4) {
+            } else if (index == 4) {
                 order.setClient(clientDao.getById(Long.parseLong(data)));
-            }
-            else if (index == 5) {
+            } else if (index == 5) {
                 order.setPrice(Double.parseDouble(data));
             }
             index++;

@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class OrderDaoImpl extends AbstractDaoImpl<Order>
-        implements OrderDao{
+        implements OrderDao {
 
     @Override
     protected void updateFields(Order oldEntity, Order newEntity) {
@@ -136,10 +136,10 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
 
         builder.append(",[");
         int i = order.getOrderedBooks().size();
-        for(Book book: order.getOrderedBooks()) {
+        for (Book book : order.getOrderedBooks()) {
             builder.append(book.getId());
             i--;
-            if(i != 0) {
+            if (i != 0) {
                 builder.append(", ");
             }
         }

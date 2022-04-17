@@ -4,10 +4,9 @@ import dao.RequestDao;
 import dao.entity.Request;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class RequestDaoImpl extends AbstractDaoImpl<Request>
-        implements RequestDao{
+        implements RequestDao {
     @Override
     protected void updateFields(Request oldEntity, Request newEntity) {
         oldEntity.setBook(newEntity.getBook());

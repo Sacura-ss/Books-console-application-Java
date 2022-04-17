@@ -3,7 +3,6 @@ package dao.impl;
 import dao.ClientDao;
 import dao.entity.Client;
 
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -1,23 +1,22 @@
 package dao.impl;
 
-import service.Exportable;
-import service.Importable;
-import dao.UniqueId;
 import dao.AbstractDao;
+import dao.UniqueId;
 import dao.entity.AbstractEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractDaoImpl<T extends AbstractEntity>
-        implements AbstractDao<T>{
+        implements AbstractDao<T> {
     private List<T> repository = new ArrayList<>();
 
     protected abstract void updateFields(T oldEntity, T newEntity);
+
     @Override
     public T getById(Long id) {
-        for(T entity: repository) {
-            if(entity.getId().equals(id))
+        for (T entity : repository) {
+            if (entity.getId().equals(id))
                 return entity;
         }
         return null;
@@ -36,11 +35,11 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity>
 
     @Override
     public void create(T entity) {
-        if(entity.getId() == null) {
+        if (entity.getId() == null) {
             entity.setId(UniqueId.generateUniqueId());
             repository.add(entity);
         } else {
-            if(getById(entity.getId()) != null) {
+            if (getById(entity.getId()) != null) {
                 update(entity.getId(), entity);
             } else {
                 repository.add(entity);

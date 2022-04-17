@@ -6,16 +6,13 @@ import dao.entity.BookGenre;
 import dao.entity.BookStatus;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 public class BookDaoImpl extends AbstractDaoImpl<Book>
-        implements BookDao{
+        implements BookDao {
 
     @Override
     protected void updateFields(Book oldEntity, Book newEntity) {
@@ -76,6 +73,7 @@ public class BookDaoImpl extends AbstractDaoImpl<Book>
         Book book = getById(id);
         book.setStatus(status);
     }
+
     public void removeFromWarehouse(Long id) {
         Book book = getById(id);
         book.setStatus(BookStatus.LACK);

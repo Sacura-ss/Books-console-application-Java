@@ -6,7 +6,6 @@ import dao.entity.Book;
 import dao.entity.BookGenre;
 import dao.entity.BookStatus;
 import dao.entity.Order;
-import dao.impl.BookDaoImpl;
 import service.BookService;
 
 import java.text.DateFormat;
@@ -103,14 +102,13 @@ public class BookServiceImpl extends AbstractServiceImpl<Book, BookDao>
                     book.setYearOfPublishing(yearOfPublishing);
                 } catch (ParseException e) {
                 }
-            }
-            else if(index == 5)
+            } else if (index == 5)
                 book.setPrice(Double.parseDouble(data));
-            else if(index == 6)
+            else if (index == 6)
                 book.setAmountRequest(Integer.parseInt(data));
-            else if(index == 7)
+            else if (index == 7)
                 book.setGenre(BookGenre.valueOf(data));
-            else if(index == 8)
+            else if (index == 8)
                 book.setStatus(BookStatus.valueOf(data));
             index++;
         }

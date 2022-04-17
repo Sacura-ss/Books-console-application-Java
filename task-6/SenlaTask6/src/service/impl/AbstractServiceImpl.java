@@ -3,8 +3,6 @@ package service.impl;
 import dao.AbstractDao;
 import dao.entity.AbstractEntity;
 import service.AbstractService;
-import service.Exportable;
-import service.Importable;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -56,15 +54,14 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends Ab
             BufferedWriter bufferWriter = new BufferedWriter(writer);
             bufferWriter.write(str);
             bufferWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
 
     @Override
     public void exportAll(String file) {
-        for(T entity: getAll()) {
+        for (T entity : getAll()) {
             Long id = entity.getId();
             exportById(id, file);
         }
@@ -77,12 +74,12 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends Ab
             reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
             Scanner scanner = null;
-            while ( line != null) {
+            while (line != null) {
                 scanner = new Scanner(line);
                 scanner.useDelimiter(",");
                 while (scanner.hasNext()) {
                     String idFromFile = scanner.next();
-                    if(id.equals(Long.parseLong(idFromFile))) {
+                    if (id.equals(Long.parseLong(idFromFile))) {
                         importFromLine(idFromFile + scanner.nextLine());
                         line = null;
                         break;
@@ -98,13 +95,13 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends Ab
     }
 
     @Override
-   public void importAll(String file) {
+    public void importAll(String file) {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(file));
             String line = null;
             while ((line = reader.readLine()) != null) {
-               importFromLine(line);
+                importFromLine(line);
             }
             reader.close();
         } catch (IOException e) {
