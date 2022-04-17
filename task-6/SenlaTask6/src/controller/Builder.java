@@ -12,6 +12,10 @@ import controller.action.client.UpdateClientAction;
 import controller.action.order.*;
 import controller.action.request.CreateRequestAction;
 import controller.action.request.DeleteRequestAction;
+import controller.action.request.ExportAllRequestAction;
+import controller.action.request.ExportRequestByIdAction;
+import controller.action.request.ImportAllRequestAction;
+import controller.action.request.ImportRequestByIdAction;
 import controller.action.request.LeaveRequestAction;
 import controller.action.request.SortRequestByAmountAction;
 import controller.action.request.SortRequestByAuthorAction;
@@ -93,6 +97,10 @@ public class Builder {
         requestList.add(new MenuItem("5 - sort request by amount", new SortRequestByAmountAction()));
         requestList.add(new MenuItem("6 - sort request by author", new SortRequestByAuthorAction()));
         requestList.add(new MenuItem("7 - sort request by title", new SortRequestByTitleAction()));
+        requestList.add(new MenuItem("8 - import by id", new ImportRequestByIdAction()));
+        requestList.add(new MenuItem("9 - export by id", new ExportRequestByIdAction()));
+        requestList.add(new MenuItem("10 - import all", new ImportAllRequestAction()));
+        requestList.add(new MenuItem("11 - export all", new ExportAllRequestAction()));
         Menu requestMenu = new Menu("Request", requestList);
 
         rootMenu.getMenuItems().get(1).setNextMenu(clientMenu);

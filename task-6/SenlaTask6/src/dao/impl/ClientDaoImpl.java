@@ -50,28 +50,6 @@ public class ClientDaoImpl extends AbstractDaoImpl<Client>
     }
 
     @Override
-    public void importFromLine(String line) {
-        Client client = new Client();
-        Scanner scanner = new Scanner(line);
-        scanner.useDelimiter(",");
-        int index = 0;
-        while (scanner.hasNext()) {
-            String data = scanner.next();
-            if (index == 0)
-                client.setId(Long.parseLong(data));
-            else if (index == 1)
-                client.setFirstName(data);
-            else if (index == 2)
-                client.setSecondName(data);
-            else if (index == 3)
-                client.setEmail(data);
-            index++;
-        }
-        index = 0;
-        create(client);
-    }
-
-    @Override
     public String exportToLine(Long id) {
         Client client = getById(id);
         String line = "";

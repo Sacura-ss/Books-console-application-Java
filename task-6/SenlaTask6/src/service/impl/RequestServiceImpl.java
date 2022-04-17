@@ -7,6 +7,7 @@ import dao.entity.Request;
 import service.RequestService;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class RequestServiceImpl extends AbstractServiceImpl<Request, RequestDao>
         implements RequestService {
@@ -40,5 +41,23 @@ public class RequestServiceImpl extends AbstractServiceImpl<Request, RequestDao>
     @Override
     public List<Request> sortRequestByAuthor() {
         return requestDao.sortRequestByAuthor();
+    }
+
+    @Override
+    public void importFromLine(String line) {
+        Request request = new Request();
+        Scanner scanner = new Scanner(line);
+        scanner.useDelimiter(",");
+        int index = 0;
+        while (scanner.hasNext()) {
+            String data = scanner.next();
+            if (index == 0)
+                request.setId(Long.parseLong(data));
+            else if (index == 1)
+                request.setBook(bookDao.getById(Long.parseLong(data)));
+            index++;
+        }
+        index = 0;
+        create(request);
     }
 }

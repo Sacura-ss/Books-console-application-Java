@@ -10,4 +10,9 @@ public class Request extends AbstractEntity{
     public void setBook(Book book) {
         this.book = book;
     }
+
+    @Override
+    public String toString() {
+        return "Request: " + book;
+    }
 }

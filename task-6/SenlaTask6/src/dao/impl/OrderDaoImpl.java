@@ -120,12 +120,6 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
         return list;
     }
 
-
-    @Override
-    public void importFromLine(String line) {
-
-    }
-
     @Override
     public String exportToLine(Long id) {
         return null;

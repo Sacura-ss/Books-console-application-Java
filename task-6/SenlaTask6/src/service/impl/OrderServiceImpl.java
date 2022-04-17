@@ -108,4 +108,9 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
     public List<Order> sortOrderByStatus() {
         return orderDao.sortOrderByStatus();
     }
+
+    @Override
+    public void importFromLine(String line) {
+
+    }
 }

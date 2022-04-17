@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class AbstractServiceImpl<T extends AbstractEntity, D extends AbstractDao<T>>
+public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends AbstractDao<T>>
         implements AbstractService<T> {
 
     private D defaultDao;
@@ -83,7 +83,7 @@ public class AbstractServiceImpl<T extends AbstractEntity, D extends AbstractDao
                 while (scanner.hasNext()) {
                     String idFromFile = scanner.next();
                     if(id.equals(Long.parseLong(idFromFile))) {
-                        defaultDao.importFromLine(idFromFile + scanner.nextLine());
+                        importFromLine(idFromFile + scanner.nextLine());
                         line = null;
                         break;
                     } else {
@@ -104,7 +104,7 @@ public class AbstractServiceImpl<T extends AbstractEntity, D extends AbstractDao
             reader = new BufferedReader(new FileReader(file));
             String line = null;
             while ((line = reader.readLine()) != null) {
-               defaultDao.importFromLine(line);
+               importFromLine(line);
             }
             reader.close();
         } catch (IOException e) {

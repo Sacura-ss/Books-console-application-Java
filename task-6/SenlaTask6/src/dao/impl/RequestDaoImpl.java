@@ -4,6 +4,7 @@ import dao.RequestDao;
 import dao.entity.Request;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class RequestDaoImpl extends AbstractDaoImpl<Request>
         implements RequestDao{
@@ -35,12 +36,15 @@ public class RequestDaoImpl extends AbstractDaoImpl<Request>
 
 
     @Override
-    public void importFromLine(String line) {
-
-    }
-
-    @Override
     public String exportToLine(Long id) {
-        return null;
+        Request request = getById(id);
+        String line = "";
+        StringBuilder builder = new StringBuilder();
+        builder.append(request.getId());
+        builder.append(',');
+        builder.append(request.getBook().getId());
+        builder.append('\n');
+        line = builder.toString();
+        return line;
     }
 }

@@ -10,7 +10,6 @@ public interface AbstractDao<T extends AbstractEntity>{
     void deleteById(Long id);
     void update(Long id, T entity);
     void create(T entity);
-    void importFromLine(String line);
     String exportToLine(Long id);
 
 }
