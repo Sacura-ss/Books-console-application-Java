@@ -86,6 +86,10 @@ public class Builder {
         orderList.add(new MenuItem("14 - sort order by execution data", new SortOrderByExecutionDataAction()));
         orderList.add(new MenuItem("15 - sort order by price", new SortOrderByPriceAction()));
         orderList.add(new MenuItem("16 - sort order by status", new SortOrderByStatusAction()));
+        orderList.add(new MenuItem("17 - import by id", new ImportOrderByIdAction()));
+        orderList.add(new MenuItem("18 - export by id", new ExportOrderByIdAction()));
+        orderList.add(new MenuItem("19 - import all", new ImportAllOrderAction()));
+        orderList.add(new MenuItem("20 - export all", new ExportAllOrderAction()));
         Menu orderMenu = new Menu("Order", orderList);
 
         List<MenuItem> requestList = new ArrayList<>();

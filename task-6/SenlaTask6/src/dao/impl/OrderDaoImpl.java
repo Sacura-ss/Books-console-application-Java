@@ -6,6 +6,8 @@ import dao.entity.Client;
 import dao.entity.Order;
 import dao.entity.OrderStatus;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -122,6 +124,32 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
 
     @Override
     public String exportToLine(Long id) {
-        return null;
+        Order order = getById(id);
+        String line = "";
+        StringBuilder builder = new StringBuilder();
+        builder.append(order.getId());
+        builder.append(',');
+        builder.append(order.getStatus());
+        builder.append(',');
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        builder.append(format.format(order.getExecutionData().getTime()));
+
+        builder.append(",[");
+        int i = order.getOrderedBooks().size();
+        for(Book book: order.getOrderedBooks()) {
+            builder.append(book.getId());
+            i--;
+            if(i != 0) {
+                builder.append(", ");
+            }
+        }
+        builder.append("],");
+
+        builder.append(order.getClient().getId());
+        builder.append(',');
+        builder.append(order.getPrice());
+        builder.append('\n');
+        line = builder.toString();
+        return line;
     }
 }
