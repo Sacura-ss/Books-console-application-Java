@@ -12,21 +12,23 @@ public interface OrderService extends AbstractService<Order> {
 
     void checkOrderForLeaveRequest(Long orderId, Long requestId);
 
-    public void openOrder(Long id);
+    void openOrder(Long id);
 
-    public void cancelOrder(Long id);
+    void cancelOrder(Long id);
 
-    public void completeOrder(Long id);
+    void completeOrder(Long id);
 
-    public Double getTotalPrice(Long id);
+    Double getTotalPrice(Long id);
 
-    public List<Order> getCompletedOrder(Calendar begin, Calendar end);
-    public Double getProfit(Calendar begin, Calendar end);
-    public Integer getAmountCompletedOrder(Calendar begin, Calendar end);
+    List<Order> getCompletedOrder(Calendar begin, Calendar end);
 
-    public List<Order> sortOrderByExecutionData();
+    Double getProfit(Calendar begin, Calendar end);
 
-    public List<Order> sortOrderByPrice();
+    Integer getAmountCompletedOrder(Calendar begin, Calendar end);
 
-    public List<Order> sortOrderByStatus();
+    List<Order> sortOrderByExecutionData();
+
+    List<Order> sortOrderByPrice();
+
+    List<Order> sortOrderByStatus();
 }

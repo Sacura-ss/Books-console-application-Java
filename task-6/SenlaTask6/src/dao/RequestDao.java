@@ -8,9 +8,9 @@ import java.util.Comparator;
 import java.util.List;
 
 public interface RequestDao extends AbstractDao<Request> {
-    public List<Request> sortRequestByAmount();
+    List<Request> sortRequestByAmount();
 
-    public List<Request> sortRequestByTitle();
+    List<Request> sortRequestByTitle();
 
-    public List<Request> sortRequestByAuthor();
+    List<Request> sortRequestByAuthor();
 }

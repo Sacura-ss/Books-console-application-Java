@@ -29,14 +29,14 @@ public interface BookDao extends AbstractDao<Book> {
 
     void addToWarehouse(Long id);
 
-    public List<Book> sortBooksByAuthor();
+    List<Book> sortBooksByAuthor();
 
-    public List<Book> sortBooksByTitle();
+    List<Book> sortBooksByTitle();
 
-    public List<Book> sortBooksByYearOfPublishing();
+    List<Book> sortBooksByYearOfPublishing();
 
-    public List<Book> sortBooksByStatus();
+    List<Book> sortBooksByStatus();
 
-    public List<Book> sortBooksByPrice();
+    List<Book> sortBooksByPrice();
 
 }

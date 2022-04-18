@@ -4,11 +4,12 @@ import dao.entity.Request;
 
 import java.util.List;
 
-public interface RequestService extends AbstractService<Request>{
+public interface RequestService extends AbstractService<Request> {
     void leaveRequest(Long requestId, Long bookId);
-    public List<Request> sortRequestByAmount();
 
-    public List<Request> sortRequestByTitle();
+    List<Request> sortRequestByAmount();
 
-    public List<Request> sortRequestByAuthor();
+    List<Request> sortRequestByTitle();
+
+    List<Request> sortRequestByAuthor();
 }

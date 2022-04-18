@@ -17,21 +17,21 @@ public interface OrderDao extends AbstractDao<Order> {
 
     void changeClientById(Long id, Client client);
 
-    public void openOrder(Long id);
+    void openOrder(Long id);
 
-    public void cancelOrder(Long id);
+    void cancelOrder(Long id);
 
-    public void completeOrder(Long id);
+    void completeOrder(Long id);
 
-    public Double getTotalPrice(Long id);
+    Double getTotalPrice(Long id);
 
-    public List<Order> getCompletedOrder(Calendar begin, Calendar end);
-    public Double getProfit(Calendar begin, Calendar end);
-    public Integer getAmountCompletedOrder(Calendar begin, Calendar end);
+    List<Order> getCompletedOrder(Calendar begin, Calendar end);
+    Double getProfit(Calendar begin, Calendar end);
+    Integer getAmountCompletedOrder(Calendar begin, Calendar end);
 
-    public List<Order> sortOrderByExecutionData();
+    List<Order> sortOrderByExecutionData();
 
-    public List<Order> sortOrderByPrice();
+    List<Order> sortOrderByPrice();
 
     public List<Order> sortOrderByStatus();
 
