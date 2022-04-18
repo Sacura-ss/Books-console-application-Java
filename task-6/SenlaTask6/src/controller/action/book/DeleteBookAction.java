@@ -2,9 +2,8 @@ package controller.action.book;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
-public class DeleteBookAction extends Action implements IAction {
+public class DeleteBookAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter id");

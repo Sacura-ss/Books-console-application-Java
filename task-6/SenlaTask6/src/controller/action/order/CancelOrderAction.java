@@ -2,9 +2,8 @@ package controller.action.order;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
-public class CancelOrderAction extends Action implements IAction {
+public class CancelOrderAction extends Action {
 
     @Override
     public void execute() {

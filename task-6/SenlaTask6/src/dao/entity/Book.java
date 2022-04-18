@@ -2,7 +2,7 @@ package dao.entity;
 
 import java.util.Calendar;
 
-public class Book extends AbstractEntity{
+public class Book extends AbstractEntity {
     private String author;
     private String title;
     private String publishingHouse;

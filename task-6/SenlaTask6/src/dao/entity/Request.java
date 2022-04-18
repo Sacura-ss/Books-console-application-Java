@@ -1,6 +1,6 @@
 package dao.entity;
 
-public class Request extends AbstractEntity{
+public class Request extends AbstractEntity {
     Book book;
 
     public Book getBook() {

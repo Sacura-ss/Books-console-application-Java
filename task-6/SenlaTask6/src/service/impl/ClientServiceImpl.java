@@ -35,6 +35,6 @@ public class ClientServiceImpl extends AbstractServiceImpl<Client, ClientDao>
             index++;
         }
         index = 0;
-        create(client);
+        createOrUpdate(client);
     }
 }

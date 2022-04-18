@@ -175,6 +175,6 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
             index++;
         }
         index = 0;
-        create(order);
+        createOrUpdate(order);
     }
 }

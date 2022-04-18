@@ -1,9 +1,8 @@
 package controller.action.book;
 
 import controller.action.Action;
-import controller.action.IAction;
 
-public class SortBooksByStatusAction extends Action implements IAction {
+public class SortBooksByStatusAction extends Action {
     @Override
     public void execute() {
         System.out.println(bookService.sortBooksByStatus());

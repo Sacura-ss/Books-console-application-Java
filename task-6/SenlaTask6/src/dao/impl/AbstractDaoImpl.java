@@ -34,7 +34,7 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity>
     }
 
     @Override
-    public void create(T entity) {
+    public void createOrUpdate(T entity) {
         if (entity.getId() == null) {
             entity.setId(UniqueId.generateUniqueId());
             repository.add(entity);
@@ -45,6 +45,12 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity>
                 repository.add(entity);
             }
         }
+    }
+
+    @Override
+    public void create(T entity) {
+        entity.setId(UniqueId.generateUniqueId());
+        repository.add(entity);
     }
 
     public void update(Long id, T newEntity) {

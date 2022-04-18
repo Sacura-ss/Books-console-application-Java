@@ -47,6 +47,11 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends Ab
     }
 
     @Override
+    public void createOrUpdate(T entity) {
+        defaultDao.createOrUpdate(entity);
+    }
+
+    @Override
     public void exportById(Long id, String file) {
         String str = defaultDao.exportToLine(id);
         try {

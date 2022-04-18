@@ -2,9 +2,8 @@ package controller.action.order;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
-public class OpenOrderAction extends Action implements IAction {
+public class OpenOrderAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter order id");

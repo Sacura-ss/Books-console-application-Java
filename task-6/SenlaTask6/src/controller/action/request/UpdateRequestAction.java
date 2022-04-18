@@ -2,9 +2,8 @@ package controller.action.request;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
-public class UpdateRequestAction extends Action implements IAction {
+public class UpdateRequestAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter first id");

@@ -2,11 +2,10 @@ package controller.action.request;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
 import java.io.IOException;
 
-public class ImportRequestByIdAction extends Action implements IAction {
+public class ImportRequestByIdAction extends Action {
     @Override
     public void execute() throws IOException {
         System.out.println("Enter request id");

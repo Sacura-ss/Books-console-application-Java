@@ -2,11 +2,10 @@ package controller.action.order;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
 import java.io.IOException;
 
-public class ExportOrderByIdAction extends Action implements IAction {
+public class ExportOrderByIdAction extends Action {
     @Override
     public void execute() throws IOException {
         System.out.println("Enter order id");

@@ -2,9 +2,8 @@ package controller.action.order;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
-public class GetTotalPriceAction extends Action implements IAction {
+public class GetTotalPriceAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter order id");

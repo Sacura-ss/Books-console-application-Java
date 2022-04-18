@@ -1,10 +1,9 @@
 package controller.action.request;
 
 import controller.action.Action;
-import controller.action.IAction;
 import dao.entity.Request;
 
-public class CreateRequestAction extends Action implements IAction {
+public class CreateRequestAction extends Action {
     @Override
     public void execute() {
         Request request = new Request();

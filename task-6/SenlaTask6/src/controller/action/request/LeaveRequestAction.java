@@ -2,11 +2,10 @@ package controller.action.request;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 import dao.OrderDao;
 import dao.impl.OrderDaoImpl;
 
-public class LeaveRequestAction extends Action implements IAction {
+public class LeaveRequestAction extends Action {
 
     @Override
     public void execute() {

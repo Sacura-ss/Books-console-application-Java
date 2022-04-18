@@ -58,6 +58,6 @@ public class RequestServiceImpl extends AbstractServiceImpl<Request, RequestDao>
             index++;
         }
         index = 0;
-        create(request);
+        createOrUpdate(request);
     }
 }

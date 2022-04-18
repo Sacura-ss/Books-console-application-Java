@@ -113,6 +113,6 @@ public class BookServiceImpl extends AbstractServiceImpl<Book, BookDao>
             index++;
         }
         index = 0;
-        create(book);
+        createOrUpdate(book);
     }
 }

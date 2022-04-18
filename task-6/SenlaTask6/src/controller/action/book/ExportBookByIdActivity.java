@@ -2,11 +2,10 @@ package controller.action.book;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
 import java.io.IOException;
 
-public class ExportBookByIdActivity extends Action implements IAction {
+public class ExportBookByIdActivity extends Action {
     @Override
     public void execute() throws IOException {
         System.out.println("Enter book id");

@@ -2,10 +2,9 @@ package controller.action.client;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 import dao.entity.Client;
 
-public class CreateClientAction extends Action implements IAction {
+public class CreateClientAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter client name");

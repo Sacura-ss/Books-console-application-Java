@@ -1,31 +1,47 @@
 package controller.action;
 
-import dao.BookDao;
-import dao.ClientDao;
-import dao.OrderDao;
-import dao.RequestDao;
-import dao.impl.BookDaoImpl;
-import dao.impl.ClientDaoImpl;
-import dao.impl.OrderDaoImpl;
-import dao.impl.RequestDaoImpl;
 import service.BookService;
 import service.ClientService;
 import service.OrderService;
 import service.RequestService;
-import service.impl.BookServiceImpl;
-import service.impl.ClientServiceImpl;
-import service.impl.OrderServiceImpl;
-import service.impl.RequestServiceImpl;
 
 
-public abstract class Action {
-    private static BookDao bookDao = new BookDaoImpl();
-    private static ClientDao clientDao = new ClientDaoImpl();
-    private static OrderDao orderDao = new OrderDaoImpl();
-    private static RequestDao requestDao = new RequestDaoImpl();
+public abstract class Action implements IAction {
+    protected static ClientService clientService;
+    protected static BookService bookService;
+    protected static OrderService orderService;
+    protected static RequestService requestService;
 
-    protected static BookService bookService = new BookServiceImpl(bookDao, orderDao);
-    protected static ClientService clientService = new ClientServiceImpl(clientDao);
-    protected static OrderService orderService = new OrderServiceImpl(orderDao, requestDao, clientDao, bookDao);
-    protected static RequestService requestService = new RequestServiceImpl(requestDao, bookDao);
+
+    public static void setClientService(ClientService clientService) {
+        Action.clientService = clientService;
+    }
+
+    public static void setBookService(BookService bookService) {
+        Action.bookService = bookService;
+    }
+
+    public static void setOrderService(OrderService orderService) {
+        Action.orderService = orderService;
+    }
+
+    public static void setRequestService(RequestService requestService) {
+        Action.requestService = requestService;
+    }
+
+    public ClientService getClientService() {
+        return clientService;
+    }
+
+    public BookService getBookService() {
+        return bookService;
+    }
+
+    public OrderService getOrderService() {
+        return orderService;
+    }
+
+    public RequestService getRequestService() {
+        return requestService;
+    }
 }

@@ -2,9 +2,8 @@ package controller.action.client;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
-public class ExportClientByIdAction extends Action implements IAction {
+public class ExportClientByIdAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter client id");

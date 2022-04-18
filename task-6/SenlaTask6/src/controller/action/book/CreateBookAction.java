@@ -2,13 +2,12 @@ package controller.action.book;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 import dao.entity.Book;
 import dao.entity.BookGenre;
 
 import java.util.Calendar;
 
-public class CreateBookAction extends Action implements IAction {
+public class CreateBookAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter book author");

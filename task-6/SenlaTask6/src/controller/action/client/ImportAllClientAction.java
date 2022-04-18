@@ -1,11 +1,10 @@
 package controller.action.client;
 
 import controller.action.Action;
-import controller.action.IAction;
 
 import java.io.IOException;
 
-public class ImportAllClientAction extends Action implements IAction {
+public class ImportAllClientAction extends Action {
     @Override
     public void execute() throws IOException {
         clientService.importAll("resources/clients.csv");

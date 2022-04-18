@@ -1,11 +1,10 @@
 package controller.action.book;
 
 import controller.action.Action;
-import controller.action.IAction;
 
 import java.io.IOException;
 
-public class ImportAllBookActivity extends Action implements IAction {
+public class ImportAllBookActivity extends Action {
     @Override
     public void execute() throws IOException {
         bookService.importAll("resources/books.csv");

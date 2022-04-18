@@ -2,11 +2,10 @@ package controller.action.order;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
 import java.util.Calendar;
 
-public class GetCompletedOrderAction extends Action implements IAction {
+public class GetCompletedOrderAction extends Action {
     @Override
     public void execute() {
         System.out.println("Enter date of begin in the format yyyy-MM-dd");

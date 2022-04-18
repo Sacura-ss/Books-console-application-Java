@@ -22,7 +22,7 @@ public class MenuItem {
         try {
             getAction().execute();
         } catch (IOException e) {
-            System.out.println(e);;
+            System.out.println(e);
         }
     }
 

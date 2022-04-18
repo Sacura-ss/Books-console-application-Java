@@ -15,6 +15,8 @@ public interface AbstractService<T extends AbstractEntity> extends Exportable, I
 
     void create(T entity);
 
+    void createOrUpdate(T entity);
+
     void importFromLine(String line);
 
 }

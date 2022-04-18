@@ -2,9 +2,8 @@ package controller.action.client;
 
 import controller.Reader;
 import controller.action.Action;
-import controller.action.IAction;
 
-public class DeleteClientAction extends Action implements IAction {
+public class DeleteClientAction extends Action {
     @Override
     public void execute() {
         System.out.println(clientService.getAll());
