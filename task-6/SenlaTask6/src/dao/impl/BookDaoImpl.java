@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookDaoImpl extends AbstractDaoImpl<Book>
         implements BookDao {
@@ -86,37 +87,37 @@ public class BookDaoImpl extends AbstractDaoImpl<Book>
 
     @Override
     public List<Book> sortBooksByAuthor() {
-        List list = getAll();
-        list.sort((Comparator<Book>) (book1, book2) -> book1.getAuthor().compareTo(book2.getAuthor()));
-        return list;
+        return getAll().stream().sorted((Comparator<Book>)
+                        (book1, book2) -> book1.getAuthor().compareTo(book2.getAuthor()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Book> sortBooksByTitle() {
-        List list = getAll();
-        list.sort((Comparator<Book>) (book1, book2) -> book1.getTitle().compareTo(book2.getTitle()));
-        return list;
+        return (getAll().stream().sorted((Comparator<Book>)
+                (book1, book2) -> book1.getTitle().compareTo(book2.getTitle())))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Book> sortBooksByYearOfPublishing() {
-        List list = getAll();
-        list.sort((Comparator<Book>) (book1, book2) -> book1.getYearOfPublishing().compareTo(book2.getYearOfPublishing()));
-        return list;
+        return getAll().stream().sorted((Comparator<Book>)
+                        (book1, book2) -> book1.getYearOfPublishing().compareTo(book2.getYearOfPublishing()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Book> sortBooksByStatus() {
-        List list = getAll();
-        list.sort((Comparator<Book>) (book1, book2) -> book1.getStatus().toString().compareTo(book2.getStatus().toString()));
-        return list;
+        return getAll().stream().sorted((Comparator<Book>)
+                        (book1, book2) -> book1.getStatus().toString().compareTo(book2.getStatus().toString()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Book> sortBooksByPrice() {
-        List list = getAll();
-        list.sort((Comparator<Book>) (book1, book2) -> book1.getPrice().compareTo(book2.getPrice()));
-        return list;
+        return getAll().stream().sorted((Comparator<Book>)
+                        (book1, book2) -> book1.getPrice().compareTo(book2.getPrice()))
+                .collect(Collectors.toList());
     }
 
     @Override

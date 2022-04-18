@@ -4,6 +4,7 @@ import dao.RequestDao;
 import dao.entity.Request;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RequestDaoImpl extends AbstractDaoImpl<Request>
         implements RequestDao {
@@ -14,23 +15,23 @@ public class RequestDaoImpl extends AbstractDaoImpl<Request>
 
     @Override
     public List<Request> sortRequestByAmount() {
-        List<Request> list = getAll();
-        list.sort((request1, request2) -> request1.getBook().getAmountRequest().compareTo(request2.getBook().getAmountRequest()));
-        return list;
+        return getAll().stream()
+                .sorted((request1, request2) -> request1.getBook().getAmountRequest().compareTo(request2.getBook().getAmountRequest()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Request> sortRequestByTitle() {
-        List<Request> list = getAll();
-        list.sort((request1, request2) -> request1.getBook().getTitle().compareTo(request2.getBook().getTitle()));
-        return list;
+        return getAll().stream()
+                .sorted((request1, request2) -> request1.getBook().getTitle().compareTo(request2.getBook().getTitle()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Request> sortRequestByAuthor() {
-        List<Request> list = getAll();
-        list.sort((request1, request2) -> request1.getBook().getAuthor().compareTo(request2.getBook().getAuthor()));
-        return list;
+        return getAll().stream()
+                .sorted((request1, request2) -> request1.getBook().getAuthor().compareTo(request2.getBook().getAuthor()))
+                .collect(Collectors.toList());
     }
 
 

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderDaoImpl extends AbstractDaoImpl<Order>
         implements OrderDao {
@@ -78,11 +79,13 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
     @Override
     public List<Order> getCompletedOrder(Calendar begin, Calendar end) {
         List<Order> completedOrder = new ArrayList<Order>();
-        for (Order order : getAll())
+        for (Order order : getAll()) {
             if (OrderStatus.COMPLETED.equals(order.getStatus())
                     && order.getExecutionData().compareTo(begin) >= 0
-                    && order.getExecutionData().compareTo(end) <= 0)
+                    && order.getExecutionData().compareTo(end) <= 0) {
                 completedOrder.add(order);
+            }
+        }
         return completedOrder;
     }
 
@@ -90,8 +93,9 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
     @Override
     public Double getProfit(Calendar begin, Calendar end) {
         Double sum = 0.0;
-        for (Order order : getCompletedOrder(begin, end))
+        for (Order order : getCompletedOrder(begin, end)) {
             sum += getTotalPrice(order.getId());
+        }
         return sum;
     }
 
@@ -102,24 +106,24 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
 
     @Override
     public List<Order> sortOrderByExecutionData() {
-        //List<Order> list = new ArrayList<>(getAll()).stream().sorted(new OrderExecutionDataComparator()).collect(Collectors.toList());
-        List<Order> list = getAll();
-        list.sort((order1, order2) -> order1.getExecutionData().compareTo(order2.getExecutionData()));
-        return list;
+        return getAll().stream()
+                .sorted((order1, order2) -> order1.getExecutionData().compareTo(order2.getExecutionData()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Order> sortOrderByPrice() {
-        List<Order> list = getAll();
-        list.sort((order1, order2) -> order1.getPrice().compareTo(order2.getPrice()));
-        return list;
+        return getAll().stream()
+                .sorted((order1, order2) -> order1.getPrice().compareTo(order2.getPrice()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Order> sortOrderByStatus() {
-        List<Order> list = getAll();
-        list.sort((order1, order2) -> order1.getStatus().toString().compareTo(order2.getStatus().toString()));
-        return list;
+        return getAll().stream()
+                .sorted((order1, order2) -> order1.getStatus().toString().compareTo(order2.getStatus().toString()))
+                .collect(Collectors.toList());
+
     }
 
     @Override

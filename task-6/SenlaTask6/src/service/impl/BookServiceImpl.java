@@ -101,6 +101,7 @@ public class BookServiceImpl extends AbstractServiceImpl<Book, BookDao>
                     yearOfPublishing.setTime(date);
                     book.setYearOfPublishing(yearOfPublishing);
                 } catch (ParseException e) {
+                    System.out.println(e);
                 }
             } else if (index == 5)
                 book.setPrice(Double.parseDouble(data));

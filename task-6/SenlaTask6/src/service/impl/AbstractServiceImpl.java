@@ -53,22 +53,49 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends Ab
 
     @Override
     public void exportById(Long id, String file) {
+        BufferedWriter bufferWriter = null;
+        FileWriter writer = null;
         String str = defaultDao.exportToLine(id);
         try {
-            FileWriter writer = new FileWriter(file, true);
-            BufferedWriter bufferWriter = new BufferedWriter(writer);
+            writer = new FileWriter(file, true);
+            bufferWriter = new BufferedWriter(writer);
             bufferWriter.write(str);
-            bufferWriter.close();
         } catch (IOException e) {
             System.out.println(e);
+        } finally {
+            if (writer != null) {
+                try {
+                    bufferWriter.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
     @Override
     public void exportAll(String file) {
-        for (T entity : getAll()) {
-            Long id = entity.getId();
-            exportById(id, file);
+        FileWriter writer = null;
+        BufferedWriter bufferWriter = null;
+        try {
+            writer = new FileWriter(file, true);
+            bufferWriter = new BufferedWriter(writer);
+            for (T entity : getAll()) {
+                Long id = entity.getId();
+                //exportById(id, file);
+                String str = defaultDao.exportToLine(id);
+                bufferWriter.write(str);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        } finally {
+            if (writer != null) {
+                try {
+                    bufferWriter.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
@@ -93,9 +120,16 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends Ab
                     }
                 }
             }
-            reader.close();
         } catch (IOException e) {
             System.out.println(e);
+        } finally {
+            if(reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 
@@ -108,9 +142,16 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity, D extends Ab
             while ((line = reader.readLine()) != null) {
                 importFromLine(line);
             }
-            reader.close();
         } catch (IOException e) {
             System.out.println(e);
+        } finally {
+            if(reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }
