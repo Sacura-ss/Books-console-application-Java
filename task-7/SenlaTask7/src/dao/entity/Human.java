@@ -1,6 +1,6 @@
 package dao.entity;
 
-public class Human extends AbstractEntity {
+public abstract class Human extends AbstractEntity {
     String firstName;
     String secondName;
 

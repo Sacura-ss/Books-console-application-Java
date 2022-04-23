@@ -6,6 +6,8 @@ import dao.entity.Client;
 import dao.entity.Order;
 import dao.entity.OrderStatus;
 
+import java.io.IOException;
+import java.io.ObjectInput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -155,5 +157,16 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
         builder.append('\n');
         line = builder.toString();
         return line;
+    }
+
+    @Override
+    public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException {
+        int count = objectInput.readInt();
+        for (int i = 0; i < count; i++) {
+            Order order = new Order();
+            create(order);
+            order.readExternal(objectInput);
+
+        }
     }
 }

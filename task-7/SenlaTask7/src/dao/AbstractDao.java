@@ -4,7 +4,7 @@ import dao.entity.AbstractEntity;
 
 import java.util.List;
 
-public interface AbstractDao<T extends AbstractEntity> {
+public interface AbstractDao<T extends AbstractEntity>{
     T getById(Long id);
 
     List<T> getAll();

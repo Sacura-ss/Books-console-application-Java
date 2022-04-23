@@ -1,5 +1,8 @@
 package dao.entity;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Calendar;
 
 public class Book extends AbstractEntity {
@@ -82,5 +85,31 @@ public class Book extends AbstractEntity {
     public String toString() {
         return "title=" + title + " "
                 + "status=" + status;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput objectOutput) throws IOException {
+        objectOutput.writeLong(getId());
+        objectOutput.writeUTF(getAuthor());
+        objectOutput.writeUTF(getTitle());
+        objectOutput.writeUTF(getPublishingHouse());
+        objectOutput.writeObject(getYearOfPublishing());
+        objectOutput.writeDouble(getPrice());
+        objectOutput.writeInt(getAmountRequest());
+        objectOutput.writeUTF(getGenre().toString());
+        objectOutput.writeUTF(getStatus().toString());
+    }
+
+    @Override
+    public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException {
+        setId(objectInput.readLong());
+        setAuthor(objectInput.readUTF());
+        setTitle(objectInput.readUTF());
+        setPublishingHouse(objectInput.readUTF());
+        setYearOfPublishing((Calendar) objectInput.readObject());
+        setPrice(objectInput.readDouble());
+        setAmountRequest(objectInput.readInt());
+        setGenre(BookGenre.valueOf(objectInput.readUTF()));
+        setStatus(BookStatus.valueOf(objectInput.readUTF()));
     }
 }

@@ -5,6 +5,8 @@ import dao.entity.Book;
 import dao.entity.BookGenre;
 import dao.entity.BookStatus;
 
+import java.io.IOException;
+import java.io.ObjectInput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -146,5 +148,16 @@ public class BookDaoImpl extends AbstractDaoImpl<Book>
         builder.append('\n');
         line = builder.toString();
         return line;
+    }
+
+    @Override
+    public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException {
+        int count = objectInput.readInt();
+        for (int i = 0; i < count; i++) {
+            Book book = new Book();
+            create(book);
+            book.readExternal(objectInput);
+
+        }
     }
 }

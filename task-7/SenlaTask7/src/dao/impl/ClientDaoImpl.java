@@ -3,6 +3,8 @@ package dao.impl;
 import dao.ClientDao;
 import dao.entity.Client;
 
+import java.io.IOException;
+import java.io.ObjectInput;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,5 +66,16 @@ public class ClientDaoImpl extends AbstractDaoImpl<Client>
         builder.append('\n');
         line = builder.toString();
         return line;
+    }
+
+    @Override
+    public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException {
+        int count = objectInput.readInt();
+        for (int i = 0; i < count; i++) {
+            Client client = new Client();
+            create(client);
+            client.readExternal(objectInput);
+
+        }
     }
 }

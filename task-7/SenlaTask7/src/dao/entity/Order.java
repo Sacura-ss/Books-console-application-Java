@@ -1,5 +1,8 @@
 package dao.entity;
 
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Calendar;
 import java.util.List;
 
@@ -49,5 +52,26 @@ public class Order extends AbstractEntity {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput objectOutput) throws IOException {
+        objectOutput.writeLong(getId());
+        objectOutput.writeUTF(getStatus().toString());
+        objectOutput.writeObject(getExecutionData());
+        objectOutput.writeObject(getOrderedBooks());
+        objectOutput.writeObject(getClient());
+        objectOutput.writeDouble(getPrice());
+    }
+
+    @Override
+    public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException {
+        setId(objectInput.readLong());
+        setStatus(OrderStatus.valueOf(objectInput.readUTF()));
+        setExecutionData((Calendar) objectInput.readObject());
+        setOrderedBooks((List<Book>) objectInput.readObject());
+        setClient((Client) objectInput.readObject());
+        setPrice(objectInput.readDouble());
+
     }
 }

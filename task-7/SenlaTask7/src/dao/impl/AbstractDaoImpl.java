@@ -4,11 +4,14 @@ import dao.AbstractDao;
 import dao.UniqueId;
 import dao.entity.AbstractEntity;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractDaoImpl<T extends AbstractEntity>
-        implements AbstractDao<T> {
+        implements AbstractDao<T>, Externalizable {
     private List<T> repository = new ArrayList<>();
 
     protected abstract void updateFields(T oldEntity, T newEntity);
@@ -56,6 +59,14 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity>
     public void update(Long id, T newEntity) {
         T entity = getById(id);
         updateFields(entity, newEntity);
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput objectOutput) throws IOException {
+        objectOutput.writeInt(repository.size());
+        for (Externalizable externalizable : repository) {
+            externalizable.writeExternal(objectOutput);
+        }
     }
 
 }

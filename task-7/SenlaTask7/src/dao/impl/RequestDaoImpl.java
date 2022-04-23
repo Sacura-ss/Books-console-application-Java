@@ -3,6 +3,8 @@ package dao.impl;
 import dao.RequestDao;
 import dao.entity.Request;
 
+import java.io.IOException;
+import java.io.ObjectInput;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,7 @@ public class RequestDaoImpl extends AbstractDaoImpl<Request>
     @Override
     protected void updateFields(Request oldEntity, Request newEntity) {
         oldEntity.setBook(newEntity.getBook());
+        oldEntity.setCompleted(newEntity.isCompleted());
     }
 
     @Override
@@ -46,5 +49,16 @@ public class RequestDaoImpl extends AbstractDaoImpl<Request>
         builder.append('\n');
         line = builder.toString();
         return line;
+    }
+
+    @Override
+    public void readExternal(ObjectInput objectInput) throws IOException, ClassNotFoundException {
+        int count = objectInput.readInt();
+        for (int i = 0; i < count; i++) {
+            Request request = new Request();
+            create(request);
+            request.readExternal(objectInput);
+
+        }
     }
 }

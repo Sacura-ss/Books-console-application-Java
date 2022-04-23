@@ -1,6 +1,8 @@
 package dao.entity;
 
-public class AbstractEntity {
+import java.io.Externalizable;
+
+public abstract class AbstractEntity implements Externalizable {
     private Long id;
 
     public Long getId() {
