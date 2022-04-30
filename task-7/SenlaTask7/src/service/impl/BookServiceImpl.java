@@ -22,10 +22,9 @@ import java.util.Scanner;
 
 public class BookServiceImpl extends AbstractServiceImpl<Book, BookDao>
         implements BookService {
-    private BookDao bookDao;
     protected OrderDao orderDao;
-
-    private RequestDao requestDao;
+    private final BookDao bookDao;
+    private final RequestDao requestDao;
 
     public BookServiceImpl(BookDao bookDao, OrderDao orderDao, RequestDao requestDao) {
         super(bookDao);
@@ -38,7 +37,8 @@ public class BookServiceImpl extends AbstractServiceImpl<Book, BookDao>
     public List<Book> getIrrelevantBooks() {
         List<Book> oldBooks = new ArrayList<>(bookDao.getAll());
         Calendar lostTime = Calendar.getInstance();
-        Integer numberMonths = Integer.parseInt(Property.getPropertyValue("book.numberMonths"));
+        Property property = new Property();
+        Integer numberMonths = Integer.parseInt(property.getPropertyValue("book.numberMonths"));
         lostTime.add(Calendar.MONTH, 0 - numberMonths);
         List<Order> orders = orderDao.getCompletedOrder(lostTime, Calendar.getInstance());
         for (Order order : orders)
@@ -86,9 +86,10 @@ public class BookServiceImpl extends AbstractServiceImpl<Book, BookDao>
 
     @Override
     public void completeRequestByBookId(Long bookId) {
-        if(Boolean.parseBoolean(Property
+        Property property = new Property();
+        if (Boolean.parseBoolean(property
                 .getPropertyValue("request.canChangeStatusIfBookInWarehouse")) == true) {
-            for(Request request: requestDao.getAll()) {
+            for (Request request : requestDao.getAll()) {
                 if (bookId.equals(request.getBook().getId())) {
                     request.setCompleted(true);
                 }

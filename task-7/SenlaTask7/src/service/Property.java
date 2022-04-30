@@ -3,19 +3,23 @@ package service;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class Property {
     public static final String PATH_TO_PROPERTIES = "config/application.properties";
+    private Map<String, String> mapProperties = new HashMap<String, String>();
 
-    public static String getPropertyValue(String propertyName) {
+    public Property() {
         FileInputStream fileInputStream = null;
         Properties properties = new Properties();
-        String propertyValue = "";
         try {
             fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
             properties.load(fileInputStream);
-            propertyValue = properties.getProperty(propertyName);
+            for (String key : properties.stringPropertyNames()) {
+                mapProperties.put(key, properties.getProperty(key));
+            }
         } catch (FileNotFoundException e) {
             System.out.println(e);
         } catch (IOException e) {
@@ -29,6 +33,9 @@ public class Property {
                 }
             }
         }
-        return propertyValue;
+    }
+
+    public String getPropertyValue(String propertyName) {
+        return mapProperties.get(propertyName);
     }
 }
