@@ -116,6 +116,25 @@ public class OrderServiceImpl extends AbstractServiceImpl<Order, OrderDao>
         return orderDao.sortOrderByStatus();
     }
 
+    @Override
+    public void updateLinksForBooks() {
+        List<Book> updatedOrderedBooks;
+        for (Order order : getAll()) {
+            updatedOrderedBooks = new ArrayList<>();
+            for(int i = 0; i < order.getOrderedBooks().size(); i++) {
+                updatedOrderedBooks.add(bookDao.getById(order.getOrderedBooks().get(i).getId()));
+            }
+            order.setOrderedBooks(updatedOrderedBooks);
+        }
+    }
+
+    @Override
+    public void updateLinksForClients() {
+        for (Order order : getAll()) {
+            addClientToOrder(order.getId(), order.getClient().getId());
+        }
+    }
+
     private String checkData(String data) {
         Integer end = data.length() - 1;
         if (data.charAt(0) == '[') {

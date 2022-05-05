@@ -13,4 +13,8 @@ public interface RequestService extends AbstractService<Request> {
 
     List<Request> sortRequestByAuthor();
 
+    void addBookToRequest(Long requestId, Long bookId);
+
+    void updateLinksForBooks();
+
 }

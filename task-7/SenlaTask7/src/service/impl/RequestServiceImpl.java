@@ -43,6 +43,20 @@ public class RequestServiceImpl extends AbstractServiceImpl<Request, RequestDao>
         return requestDao.sortRequestByAuthor();
     }
 
+    @Override
+    public void addBookToRequest(Long requestId, Long bookId) {
+        Request request = requestDao.getById(requestId);
+        Book book = bookDao.getById(bookId);
+        request.setBook(book);
+    }
+
+    @Override
+    public void updateLinksForBooks() {
+        for (Request request : getAll()) {
+            addBookToRequest(request.getId(), request.getBook().getId());
+        }
+    }
+
 
     @Override
     public void importFromLine(String line) {

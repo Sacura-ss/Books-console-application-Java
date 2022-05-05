@@ -166,7 +166,6 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order>
             Order order = new Order();
             create(order);
             order.readExternal(objectInput);
-
         }
     }
 }

@@ -31,4 +31,8 @@ public interface OrderService extends AbstractService<Order> {
     List<Order> sortOrderByPrice();
 
     List<Order> sortOrderByStatus();
+
+    void updateLinksForBooks();
+
+    void updateLinksForClients();
 }
